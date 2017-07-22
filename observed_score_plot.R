@@ -1,5 +1,16 @@
-# Posterior predictive check of observed score distribution for IRT models
-ppc_observed_score <- function(fit, data, confint = 0.95) {
+#' @title
+#' Posterior predictive score distribution plot
+#
+#' @description
+#' Posterior predictive check of observed score distribution for IRT models
+#
+#' @param   y_rep     posterior replications of a stanfit object
+#' @param   data      Stan data file (named list) 
+#' @param   confint   confidence level
+#'
+#' @export
+#'
+ppc_observed_score <- function(y_rep, data, confint = 0.95) {
   extent <- 0:data$K 
 
   get_scores <- function(x, by) {
@@ -10,7 +21,6 @@ ppc_observed_score <- function(fit, data, confint = 0.95) {
   score_obs <- get_scores(data$y, data$j)
 
   # calculate replicated score distribution per iteration
-  y_rep <- extract(fit, permuted = TRUE)$y_rep
   score_rep <- apply(y_rep, 1, function(x) { get_scores(x, data$j) })   
 
   # get quantiles
