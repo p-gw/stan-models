@@ -3,7 +3,7 @@ data {
   int<lower=1> K;              // number of items
   int<lower=1> N;              // number of observations (J*K)
   int<lower=1, upper=J> j[N];  // index for persons  
-  int<lower=1, upper=K> k[N];  // indey for items
+  int<lower=1, upper=K> k[N];  // index for items
   int<lower=0, upper=1> y[N];  // item response   
 }
 parameters {
